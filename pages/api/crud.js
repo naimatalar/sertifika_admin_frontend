@@ -7,7 +7,7 @@ export const apiConstant = "http://localhost:58073";
 export const antegraSystem = "http://localhost:2354/api/";
 
 const masterUrl = apiConstant + "/api/";
-export const fileUploadUrl = apiConstant + "/root/uploadedfiles/";
+export const fileUploadUrl = apiConstant + "/root/Upload/";
 
 export const GetWithToken = async (url) => {
     const headers =
@@ -94,6 +94,29 @@ export const PostWithToken = async (url, data) => {
         alert("hata oluştu n/ " + error)
     }
 }
+
+export const PostWithTokenFile = async (url, data) => {
+
+    const headers =
+    {
+        headers: {
+            "Content-Type": "multipart/form-data" ,
+            Authorization: 'Bearer ' + localStorage.getItem("usrtknbalotetknenter")
+        },
+    }
+
+    var bodyFormData = new FormData();
+    debugger
+    bodyFormData.append(data.name,data.data)
+
+    try {
+
+        return Axios.post(masterUrl + url, bodyFormData, headers)
+    } catch (error) {
+        alert("hata oluştu n/ " + error)
+    }
+}
+
 export const PostNoneToken = async (url, data) => {
 
     const headers =

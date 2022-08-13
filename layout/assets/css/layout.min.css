@@ -2559,8 +2559,7 @@ select, input[type="datetime-local"], input[type="date"], input[type="text"], in
 .tabbed.skin-graphite {
     border-bottom-color: #454545;
 }
-
-*/ .tabbed.skin-concrete {
+ .tabbed.skin-concrete {
     border-bottom-color: #95A5A6;
 }
 

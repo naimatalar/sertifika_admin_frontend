@@ -403,8 +403,6 @@ export default function Index() {
                                 ["sampleMethod", "Analiz Metodu"],
                                 ["sampleExaminationDevicesCount", "Cihaz Adet"],
                                 ["sampleExaminationPriceCurrencies.price", "Fiyatlandırma", "price|price", "currenyTypeName"],
-
-
                                 {
                                     header: "Analiz Sonuç Değerleri Tanımla",
                                     dynamicButton: (d) => {
@@ -412,7 +410,6 @@ export default function Index() {
                                         return <button className='btn btn-sm btn-outline-success' onClick={(x) => { setSelectedExamination(d); toggleSetREsultValueModal(); }}><i className='fa fa-percent mr-1'></i> <b>DeğerTanımla <span>({d.laboratoryUserCount})</span></b></button>
                                     }
                                 }
-
                             ]} Title={"Kayıtlı Analiz Listesi"}
                                 Description={"Analiz tanımlayıp, tanımladığınız Analizlara görevli atama işlemi yapabilirsiniz."}
                                 HeaderButton={{ text: "Analiz Ekle", action: () => { setInitialValues({}); toggleModal(true); setModelCurrencies([]);setDevices([]) } }}
