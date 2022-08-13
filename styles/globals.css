@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.firm-detail-box-field{
+  font-size: 17px;
+  border-bottom: 2px dashed #32414873;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  background: #26a69a2b;
+}
+.firm-detail-box{
+  box-shadow: 1px 17px 26px -9px black;
+    padding: 18px;
+}
