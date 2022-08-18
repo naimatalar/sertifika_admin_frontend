@@ -106,7 +106,7 @@ export const PostWithTokenFile = async (url, data) => {
     }
 
     var bodyFormData = new FormData();
-    debugger
+    
     bodyFormData.append(data.name,data.data)
 
     try {

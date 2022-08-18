@@ -22,7 +22,7 @@ export default function (props) {
         var id = ""
         if (isBrowser) {
             id = window.location.href.split("/")[window.location.href.split("/").length - 1]
-            var d = await GetWithToken("Company/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+            var d = await GetWithToken("Product/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
             setData(d.data)
         }
     }
@@ -39,7 +39,7 @@ export default function (props) {
         var id = ""
         if (isBrowser) {
             id = window.location.href.split("/")[window.location.href.split("/").length - 1]
-            var d = await GetWithToken("Company/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+            var d = await GetWithToken("Product/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
             setData(d.data)
         }
     }
@@ -50,6 +50,7 @@ start()
 
     const submit = async (val) => {
         var dataId = null;
+       
         
         if (val.id == undefined) {
             var d = await PostWithToken("Document/Create", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
@@ -117,7 +118,7 @@ start()
                         onSubmit={(values, { setSubmitting }) => {
 
                             values.objectId = data.id;
-                            values.documnetKind = 2;
+                            values.documnetKind = 3;
                             values.documentType = documentType
                             setTimeout(async () => {
                                 await submit(values)
@@ -246,14 +247,9 @@ start()
                                 </div>
                                 <div className='col-12 col-md-12 row'>
                                     <div className='col-12 mb-3 firm-detail-box-field' >
-                                        <b>Telefon : </b>{data.phone}
+                                        <b>Üretici Firma : </b>{data.companyName}
                                     </div>
-                                    <div className='col-12 mb-3 firm-detail-box-field' >
-                                        <b>Mail : </b>{data.email}
-                                    </div>
-                                    <div className=' col-12 mb-3 firm-detail-box-field' >
-                                        <b>Adres : </b>{data.address}
-                                    </div>
+                                 
                                     <div className='col-12 mt-2 firm-detail-box-field'>
                                         <b>Açıklama : </b>{data.description}
                                     </div>

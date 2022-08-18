@@ -22,7 +22,7 @@ export default function (props) {
         var id = ""
         if (isBrowser) {
             id = window.location.href.split("/")[window.location.href.split("/").length - 1]
-            var d = await GetWithToken("Company/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+            var d = await GetWithToken("Person/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
             setData(d.data)
         }
     }
@@ -39,7 +39,7 @@ export default function (props) {
         var id = ""
         if (isBrowser) {
             id = window.location.href.split("/")[window.location.href.split("/").length - 1]
-            var d = await GetWithToken("Company/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+            var d = await GetWithToken("Person/getDetailById/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
             setData(d.data)
         }
     }
@@ -50,6 +50,7 @@ start()
 
     const submit = async (val) => {
         var dataId = null;
+       
         
         if (val.id == undefined) {
             var d = await PostWithToken("Document/Create", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
@@ -117,7 +118,7 @@ start()
                         onSubmit={(values, { setSubmitting }) => {
 
                             values.objectId = data.id;
-                            values.documnetKind = 2;
+                            values.documnetKind = 1;
                             values.documentType = documentType
                             setTimeout(async () => {
                                 await submit(values)
@@ -154,7 +155,7 @@ start()
                                         <Field type="date" id="expireDate" className="form-control" name="expireDate" />
                                     </div>
                                     <div className='col-md-6 col-12 mb-3'>
-                                        <label className='input-label'>Firma Logo</label>
+                                        <label className='input-label'>Belgeler</label>
                                         <input type="file" onChange={(x) => {
                                             var files = file;
                                             files.push(x.target.files[0])
@@ -224,7 +225,7 @@ start()
             </Modal>
 
             <Layout permissionControl={false}>
-                <PageHeader title={data?.name} map={[
+                <PageHeader title={data?.firsName+" "+data?.lastName} map={[
                     { url: "/sertifika-rapor/firma-tanimlari/", name: "Firmma Tanımları" },
                     { url: "", name: "Detay" },
 
@@ -236,7 +237,7 @@ start()
                             <div className='col-12 col-md-4 firm-detail-box'>
 
                                 <div className='col-12 text-center mb-2'>
-                                    <b style={{ fontSize: 26 }}>{data.name}</b>
+                                    <b style={{ fontSize: 26 }}>{data?.firsName+" "+data?.lastName}</b>
                                 </div>
                                 <div className='col-12 col-md-12 mb-3'>
                                     <div className='col-12 text-center'>
@@ -246,16 +247,11 @@ start()
                                 </div>
                                 <div className='col-12 col-md-12 row'>
                                     <div className='col-12 mb-3 firm-detail-box-field' >
-                                        <b>Telefon : </b>{data.phone}
+                                        <b>Meslek : </b>{data?.title}
                                     </div>
-                                    <div className='col-12 mb-3 firm-detail-box-field' >
-                                        <b>Mail : </b>{data.email}
-                                    </div>
-                                    <div className=' col-12 mb-3 firm-detail-box-field' >
-                                        <b>Adres : </b>{data.address}
-                                    </div>
+                                 
                                     <div className='col-12 mt-2 firm-detail-box-field'>
-                                        <b>Açıklama : </b>{data.description}
+                                        <b>Açıklama : </b>{data?.description}
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +264,7 @@ start()
                                             <th>
                                                 Adı
                                             </th>
-                                            <th>
+                                            <th> 
                                                 No
                                             </th>
                                             <th>
@@ -286,10 +282,10 @@ start()
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.report?.length == 0 && <tr>
+                                        {data?.report?.length == 0 && <tr>
                                             <td colSpan={5} className="text-center">Rapor Bulunamadı.</td>
                                         </tr>}
-                                        {data.report?.map((item, key) => {
+                                        {data?.report?.map((item, key) => {
                                             return (refreshPAge &&
                                                 <tr>
                                                     <td>{item.name}</td>
@@ -345,10 +341,10 @@ start()
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {data.certifica?.length == 0 && <tr>
+                                            {data?.certifica?.length == 0 && <tr>
                                                 <td colSpan={5} className="text-center">Sertifika Bulunamadı.</td>
                                             </tr>}
-                                            {data.certifica?.map((item, key) => {
+                                            {data?.certifica?.map((item, key) => {
                                                 return (refreshPAge &&
                                                     <tr>
                                                         <td>{item.name}</td>

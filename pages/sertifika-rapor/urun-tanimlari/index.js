@@ -34,7 +34,7 @@ export default function Index() {
     const submit = async (val) => {
         var dataId = null;
         if (val.id == undefined) {
-            var d = await PostWithToken("Company/Create", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
+            var d = await PostWithToken("Product/Create", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
             if (d.isError) {
                 alert(d.message)
             } else {
@@ -43,7 +43,7 @@ export default function Index() {
             }
 
         } else {
-            var d = await PostWithToken("Company/Edit", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
+            var d = await PostWithToken("Product/Edit", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
 
             if (d.isError) {
                 alert(d.message)
@@ -55,19 +55,19 @@ export default function Index() {
         if (file) {
             var d = await PostWithTokenFile("FileUpload/Upload", { name: "file", data: file }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
 
-            await PostWithToken("Company/UploadFile", { fileName: d.data.fileName, id: dataId }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
+            await PostWithToken("Product/UploadFile", { fileName: d.data.fileName, id: dataId }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
 
         }
         setRefreshDatatable(new Date())
     }
     const deleteFile = async (fileName, id) => {
 
-        await PostWithToken("Company/FileDelete", { fileName: fileName, id: id }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
+        await PostWithToken("Product/FileDelete", { fileName: fileName, id: id }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
 
 
     }
     const deleteData = async (data) => {
-        var d = await GetWithToken("company/delete/" + data.id).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
+        var d = await GetWithToken("Product/delete/" + data.id).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
         if (d.isError) {
             alert(d.message)
         }
@@ -93,7 +93,7 @@ export default function Index() {
 
     const editData = async (data) => {
         setHiddenPassordField(true)
-        var d = await GetWithToken("Company/getById/" + data.id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+        var d = await GetWithToken("Product/getById/" + data.id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
 
 
         setInitialData(d.data)
@@ -116,7 +116,7 @@ export default function Index() {
                     <div className="d-flex justify-content-center mb-2">
                     </div>
                     <div className="d-flex ">
-                        <p>Firma <b>Tanımlama</b> Formu</p>
+                        <p>Ürün <b>Tanımlama</b> Formu</p>
                     </div>
                     <button onClick={() => setModelOpen(!modalOpen)} type='button' className='modal-close-button btn btn-danger btn-sm p-1'><i className='fas fa-times'></i></button>
 
@@ -148,23 +148,19 @@ export default function Index() {
                                     <Field type="hidden" name="id" />
                                     <div className='col-md-6 col-12  mb-3'>
                                         <ErrorMessage name="name" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Firma Ad/Ünvan</label>
+                                        <label className='input-label'>Ürün Adı</label>
                                         <Field type="text" id="name" className="form-control" name="name" />
                                     </div>
-                                    <div className='col-md-6 col-12  mb-3'>
-                                        <ErrorMessage name="email" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>E-Posta</label>
-                                        <Field type="text" id="email" className="form-control" name="email" />
-                                    </div>
+                                 
 
                                     <div className='col-md-6 col-12  mb-3'>
-                                        <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Telefon</label>
-                                        <Field type="text" id="phone" className="form-control" name="phone" />
+                                        <ErrorMessage name="companyName" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Üretici Firma</label>
+                                        <Field type="text" id="companyName" className="form-control" name="companyName" />
                                     </div>
                                     <div className='col-md-6 col-12 mb-3'>
                                         {/* <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' /> */}
-                                        <label className='input-label'>Firma Logo</label>
+                                        <label className='input-label'>Ürün Logo</label>
                                         <input type="file" onChange={(x) => setFile(x.target.files[0])} name="file" id="file"></input>
                                         {
                                             file != null &&
@@ -183,12 +179,7 @@ export default function Index() {
                                         }
                                     </div>
 
-                                    <div className='col-12  mb-3'>
-                                        <ErrorMessage name="address" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Adres</label>
-                                        <Field as="textarea" name="address" className="form-control">
-                                        </Field>
-                                    </div>
+                                
                                     <div className='col-12 mb-3'>
                                         <ErrorMessage name="description" component="div" className='text-danger danger-alert-form' />
                                         <label className='input-label'>Açıklama</label>
@@ -217,10 +208,9 @@ export default function Index() {
 
 
             <Layout>
-                <PageHeader title="Sertifika & Firma" map={[
-                    { url: "", name: "Sertifika & Firma" },
-                    { url: "", name: "Firma Tanımlama" },
-                    
+                <PageHeader title="Kullanıcı Oluştur" map={[
+                    { url: "", name: "Yönetimsel Araçlar" },
+                    { url: "", name: "Kullanıcı Oluştur" }
                 ]}>
 
                 </PageHeader>
@@ -229,20 +219,17 @@ export default function Index() {
 
                 <div className='content pr-3 pl-3'>
                     <div className='card'>
-                        <DataTable Refresh={refreshDataTable} DataUrl={"Company/GetAll"} Headers={[
-                            ["name", "Firma Adı"],
-                            ["email", "E-Posta"],
-                            ["phone", "Telefon"],
-
-                            ["address", "Adres"],
+                        <DataTable Refresh={refreshDataTable} DataUrl={"Product/GetAll"} Headers={[
+                            ["name", "Ürün Adı"],
+                            ["companyName", "Üretici Firma"],
                             {
                                 header: <span>Detay</span>,
-                                dynamicButton: (data) => { return <a className='btn btn-sm btn-outline-info' title='Detay' href={"firma-tanimlari/detay/" + data.id}><i className='fas fa-search'></i> Detay</a> }
+                                dynamicButton: (data) => { return <a className='btn btn-sm btn-outline-info' title='Detay' href={"urun-tanimlari/detay/" + data.id}><i className='fas fa-search'></i> Detay</a> }
                             }
-                        ]} Title={<span>Firma Listesi</span>}
-                            Description={"Firma kayıtlarında düzenleme ve ekleme işlemini burdan yapabilirsiniz"}
+                        ]} Title={<span>Ürün Listesi</span>}
+                            Description={"Ürün kayıtlarında düzenleme ve ekleme işlemini burdan yapabilirsiniz"}
                             HeaderButton={{
-                                text: "Firma Oluştur", action: () => {
+                                text: "Ürün Oluştur", action: () => {
                                     setModelOpen(!modalOpen)
                                     setInitialData({})
 

@@ -16,7 +16,7 @@ export default function Setup() {
 
 
         setIsError(false);
-        debugger
+        
         var reg = new RegExp(/^(((?=.*}$){)|((?!.*}$)))((?!.*-.*)|(?=(.*[-].*){4}))[0-9a-fA-F]{8}[-]?([0-9a-fA-F]{4}[-]?){3}[0-9a-fA-F]{12}?[}]?$/gm)
         var isGuid = reg.test(value)
         if (isGuid == false) {
