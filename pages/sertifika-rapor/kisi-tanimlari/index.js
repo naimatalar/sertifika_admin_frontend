@@ -117,7 +117,7 @@ export default function Index() {
                     <div className="d-flex justify-content-center mb-2">
                     </div>
                     <div className="d-flex ">
-                        <p>Ürün <b>Tanımlama</b> Formu</p>
+                        <p>Kişi <b>Tanımlama</b> Formu</p>
                     </div>
                     <button onClick={() => setModelOpen(!modalOpen)} type='button' className='modal-close-button btn btn-danger btn-sm p-1'><i className='fas fa-times'></i></button>
 
@@ -218,9 +218,9 @@ export default function Index() {
 
 
             <Layout>
-                <PageHeader title="Kullanıcı Oluştur" map={[
-                    { url: "", name: "Yönetimsel Araçlar" },
-                    { url: "", name: "Kullanıcı Oluştur" }
+                <PageHeader title="Kişi Tanımlama" map={[
+                    { url: "", name: "Sertifika Rapor" },
+                    { url: "", name: "Kişi Tanımlama" }
                 ]}>
 
                 </PageHeader>
@@ -239,10 +239,10 @@ export default function Index() {
                                 header: <span>Detay</span>,
                                 dynamicButton: (data) => { return <a className='btn btn-sm btn-outline-info' title='Detay' href={"kisi-tanimlari/detay/" + data.id}><i className='fas fa-search'></i> Detay</a> }
                             }
-                        ]} Title={<span>Ürün Listesi</span>}
-                            Description={"Ürün kayıtlarında düzenleme ve ekleme işlemini burdan yapabilirsiniz"}
+                        ]} Title={<span>Kişiler </span>}
+                            Description={"Kişi kayıtlarında düzenleme ve ekleme işlemini burdan yapabilirsiniz"}
                             HeaderButton={{
-                                text: "Ürün Oluştur", action: () => {
+                                text: "Kişi Oluştur", action: () => {
                                     setModelOpen(!modalOpen)
                                     setInitialData({})
 

@@ -208,9 +208,9 @@ export default function Index() {
 
 
             <Layout>
-                <PageHeader title="Kullanıcı Oluştur" map={[
-                    { url: "", name: "Yönetimsel Araçlar" },
-                    { url: "", name: "Kullanıcı Oluştur" }
+                <PageHeader title="Ürün Tanımlama" map={[
+                    { url: "", name: "Sertifika Rapo" },
+                    { url: "", name: "Ürün Tanımlama" }
                 ]}>
 
                 </PageHeader>
