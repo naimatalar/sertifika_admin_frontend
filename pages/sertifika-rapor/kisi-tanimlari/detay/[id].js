@@ -133,6 +133,7 @@ export default function (props) {
                                 await submit(values)
                                 setSubmitting(false);
                                 setModelOpen(!modalOpen)
+                                start()
                             }, 400);
                         }}
                     >
@@ -164,7 +165,7 @@ export default function (props) {
                                         <Field type="date" id="expireDate" className="form-control" name="expireDate" />
                                     </div>
                                     <div className='col-md-6 col-12 mb-3'>
-                                        <label className='input-label'>Belgeler</label>
+                                        <label className='input-label'>Dökümanlar</label>
                                         <input type="file" onChange={(x) => {
                                             var files = file;
                                             files.push(x.target.files[0])
@@ -234,7 +235,7 @@ export default function (props) {
             </Modal>
 
             <Layout permissionControl={false}>
-                <PageHeader title={data?.firsName + " " + data?.lastName} map={[
+                <PageHeader title={data?.firstName + " " + data?.lastName} map={[
                     { url: "/sertifika-rapor/firma-tanimlari/", name: "Firmma Tanımları" },
                     { url: "", name: "Detay" },
 

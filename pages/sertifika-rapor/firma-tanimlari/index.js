@@ -245,7 +245,7 @@ export default function Index() {
                                 text: "Firma Oluştur", action: () => {
                                     setModelOpen(!modalOpen)
                                     setInitialData({})
-
+                                    setFile(null)
                                 }
                             }}
                             EditButton={editData}

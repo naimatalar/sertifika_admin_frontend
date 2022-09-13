@@ -245,6 +245,7 @@ export default function Index() {
                                 text: "Kişi Oluştur", action: () => {
                                     setModelOpen(!modalOpen)
                                     setInitialData({})
+                                    setFile(null)
 
                                 }
                             }}

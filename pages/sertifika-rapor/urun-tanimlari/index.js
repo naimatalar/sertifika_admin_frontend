@@ -232,7 +232,7 @@ export default function Index() {
                                 text: "Ürün Oluştur", action: () => {
                                     setModelOpen(!modalOpen)
                                     setInitialData({})
-
+                                    setFile(null)
                                 }
                             }}
                             EditButton={editData}

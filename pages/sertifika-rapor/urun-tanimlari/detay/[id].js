@@ -131,6 +131,7 @@ export default function (props) {
                                 await submit(values)
                                 setSubmitting(false);
                                 setModelOpen(!modalOpen)
+                                start()
                             }, 400);
                         }}
                     >
@@ -162,7 +163,7 @@ export default function (props) {
                                         <Field type="date" id="expireDate" className="form-control" name="expireDate" />
                                     </div>
                                     <div className='col-md-6 col-12 mb-3'>
-                                        <label className='input-label'>Firma Logo</label>
+                                        <label className='input-label'>Dökümanlar</label>
                                         <input type="file" onChange={(x) => {
                                             var files = file;
                                             files.push(x.target.files[0])
