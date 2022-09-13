@@ -45,12 +45,19 @@ export default function (props) {
     }
     const deleteFileDb = async (fileName, id) => {
         await PostWithToken("Document/FileDelete", { fileName: fileName, id: id }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
-start()
+        start()
     }
+    const deleteDocument = async (id) => {
+        if (confirm("Kayıt Silinecek Onaylıyor musnuz?")) {
+            var d = await GetWithToken("document/delete/" + id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+            start()
+        }
+    }
+
 
     const submit = async (val) => {
         var dataId = null;
-        
+
         if (val.id == undefined) {
             var d = await PostWithToken("Document/Create", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
             if (d.isError) {
@@ -87,7 +94,7 @@ start()
 
     return (
         <>
-          {/* {
+            {/* {
             loading && <PageLoading></PageLoading>
         } */}
 
@@ -99,7 +106,7 @@ start()
                     <div className="d-flex justify-content-center mb-2">
                     </div>
                     <div className="d-flex ">
-                        <p>Rapor & Sertifika <b>Tanımlama</b> Formu</p>
+                        <p>Rapor {"&"} Sertifika <b>Tanımlama</b> Formu</p>
                     </div>
                     <button onClick={() => setModelOpen(!modalOpen)} type='button' className='modal-close-button btn btn-danger btn-sm p-1'><i className='fas fa-times'></i></button>
 
@@ -299,7 +306,7 @@ start()
                                                     <td>{item.documentFiles?.length}</td>
                                                     <td>
                                                         <button className='btn btn-info btn-sm' onClick={() => {
-                                                            
+
                                                             setDocumentFiles(item.documentFiles); setModelOpen(true); setInitialData({
                                                                 name: item.name,
                                                                 documentNo: item.documentNo,
@@ -307,11 +314,14 @@ start()
                                                                 expireDate: item.eDate,
                                                                 description: item.description,
                                                                 id: item.id,
-                                                                documentType:1
+                                                                documentType: 1
 
-                                                            }); setDocumnetType(1);setRefreshPAge(new Date())
+                                                            }); setDocumnetType(1); setRefreshPAge(new Date())
                                                         }}><i className='fa fa-edit'></i> Düzenle</button>
+                                                        <button className='btn btn-danger btn-sm ml-1' onClick={() => {
 
+                                                            deleteDocument(item.id)
+                                                        }}><i className='fa fa-trash'></i> Sil</button>
                                                     </td>
 
 
@@ -358,19 +368,23 @@ start()
                                                         <td>{item.documentFiles?.length}</td>
                                                         <td>
 
-                                                        <button className='btn btn-info btn-sm' onClick={() => {
-                                                            
-                                                            setDocumentFiles(item.documentFiles); setModelOpen(true); setInitialData({
-                                                                name: item.name,
-                                                                documentNo: item.documentNo,
-                                                                documentDate: item.dDate,
-                                                                expireDate: item.eDate,
-                                                                description: item.description,
-                                                                id: item.id,
-                                                                documentType:2
+                                                            <button className='btn btn-info btn-sm' onClick={() => {
 
-                                                            }); setDocumnetType(2);setRefreshPAge(new Date())
-                                                        }}><i className='fa fa-edit'></i> Düzenle</button>
+                                                                setDocumentFiles(item.documentFiles); setModelOpen(true); setInitialData({
+                                                                    name: item.name,
+                                                                    documentNo: item.documentNo,
+                                                                    documentDate: item.dDate,
+                                                                    expireDate: item.eDate,
+                                                                    description: item.description,
+                                                                    id: item.id,
+                                                                    documentType: 2
+
+                                                                }); setDocumnetType(2); setRefreshPAge(new Date())
+                                                            }}><i className='fa fa-edit'></i> Düzenle</button>
+                                                            <button className='btn btn-danger btn-sm ml-1' onClick={() => {
+
+                                                                deleteDocument(item.id)
+                                                            }}><i className='fa fa-trash'></i> Sil</button>
                                                         </td>
 
                                                     </tr>)
