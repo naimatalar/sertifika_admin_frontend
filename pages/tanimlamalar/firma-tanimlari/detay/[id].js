@@ -84,7 +84,7 @@ export default function (props) {
                                     </div>
                                     <div className='col-md-6 col-12  mb-3'>
                                         <ErrorMessage name="documentNo" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Döküman Numarası</label>
+                                        <label className='input-label'>Döküman No / Barkod</label>
                                         <Field type="text" id="documentNo" className="form-control" name="description" />
                                     </div>
 
