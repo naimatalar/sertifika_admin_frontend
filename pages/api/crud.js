@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 
 // export const apiConstant = "https://api.kredi.com.tr";
-export const apiConstant = "https://crt.api.halic.edu.tr";
+export const apiConstant = "https://crt_api.halic.edu.tr";
 export const antegraSystem = "http://localhost:2354/api/";
 
 const masterUrl = apiConstant + "/api/";
