@@ -149,7 +149,7 @@ function Layout({ children, permissionControl = true }) {
                                 <ul className="media-list">
                                     <li className="media">
                                         <div className="mr-3 position-relative">
-                                            <Image src="../layout/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" className="rounded-circle" alt=""></Image>
+                                            <Image src={require("../layout/global_assets/images/placeholders/placeholder.jpg" )}width="36" height="36" className="rounded-circle" alt=""></Image>
                                         </div>
 
                                         <div className="media-body">
