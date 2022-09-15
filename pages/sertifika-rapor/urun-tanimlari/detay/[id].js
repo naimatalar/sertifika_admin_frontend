@@ -6,7 +6,7 @@ import Layout from '../../../../layout/layout';
 import PageHeader from '../../../../layout/pageheader';
 import { apiConstant, fileUploadUrl, GetWithToken, PostWithToken, PostWithTokenFile } from '../../../api/crud';
 var isBrowser = typeof (window) != undefined;
-export default function index(props) {
+export default function Index(props) {
     const [data, setData] = useState({})
     const [modalOpen, setModelOpen] = useState(false)
     const [initialData, setInitialData] = useState({ id: null })
