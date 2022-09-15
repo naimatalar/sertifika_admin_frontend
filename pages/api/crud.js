@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 
 // export const apiConstant = "https://api.kredi.com.tr";
-export const apiConstant = "http://http://37.148.212.29:8085";
+export const apiConstant = "http://37.148.212.29:8085";
 export const antegraSystem = "http://localhost:2354/api/";
 
 const masterUrl = apiConstant + "/api/";
