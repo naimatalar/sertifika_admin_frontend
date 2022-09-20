@@ -158,6 +158,12 @@ export default function Index() {
                                         <label className='input-label'>Üretici Firma</label>
                                         <Field type="text" id="companyName" className="form-control" name="companyName" />
                                     </div>
+                                    <div className='col-md-6 col-12  mb-3'>
+                                        <ErrorMessage name="barcode" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Barkod</label>
+                                        <Field type="text" id="barcode" className="form-control" name="barcode" />
+                                    </div>
+
                                     <div className='col-md-6 col-12 mb-3'>
                                         {/* <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' /> */}
                                         <label className='input-label'>Ürün Logo</label>

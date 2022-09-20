@@ -149,7 +149,7 @@ function Layout({ children, permissionControl = true }) {
                                 <ul className="media-list">
                                     <li className="media">
                                         <div className="mr-3 position-relative">
-                                            <img src="../layout/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" className="rounded-circle" alt=""></img>
+                                            {/* <Image src={require("../layout/global_assets/images/placeholders/placeholder.jpg" )}width={36} height={36} className="rounded-circle" alt=""></Image> */}
                                         </div>
 
                                         <div className="media-body">
@@ -229,7 +229,8 @@ function Layout({ children, permissionControl = true }) {
                                 <div className="media">
                                     <div className="mr-3">
                                         <a href="#">
-                                            <Image src={require("../layout/global_assets/images/placeholders/placeholder.jpg")} width="38" height="38" className="rounded-circle" alt=""></Image></a>
+                                            {/* <Image src={require("../layout/global_assets/images/placeholders/placeholder.jpg")} width={38} height={38} className="rounded-circle" alt=""></Image> */}
+                                            </a>
                                     </div>
 
                                     <div className="media-body">

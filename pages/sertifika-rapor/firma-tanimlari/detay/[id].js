@@ -6,7 +6,7 @@ import Layout from '../../../../layout/layout';
 import PageHeader from '../../../../layout/pageheader';
 import { apiConstant, fileUploadUrl, GetWithToken, PostWithToken, PostWithTokenFile } from '../../../api/crud';
 var isBrowser = typeof (window) != undefined;
-export default function (props) {
+export default function Index(props) {
     const [data, setData] = useState({})
     const [modalOpen, setModelOpen] = useState(false)
     const [initialData, setInitialData] = useState({ id: null })
@@ -147,7 +147,7 @@ export default function (props) {
                                     </div>
                                     <div className='col-md-6 col-12  mb-3'>
                                         <ErrorMessage name="documentNo" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Döküman Numarası</label>
+                                        <label className='input-label'>Döküman No / Barkod</label>
                                         <Field type="text" id="documentNo" className="form-control" name="documentNo" />
                                     </div>
 
