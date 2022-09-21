@@ -33,67 +33,25 @@ export default function Index() {
 
     const submit = async (val) => {
         var dataId = null;
-        if (val.id == undefined) {
-            var d = await PostWithToken("Company/Create", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
-            if (d.isError) {
-                alert(d.message)
-            } else {
 
-                dataId = d.data.id
-            }
+        var d = await PostWithToken("DocumentApplication/Update", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
 
-        } else {
-            var d = await PostWithToken("Company/Edit", val).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
-
-            if (d.isError) {
-                alert(d.message)
-            } else {
-                dataId = d.data.id
-            }
-        }
-
-        if (file) {
-            var d = await PostWithTokenFile("FileUpload/Upload", { name: "file", data: file }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
-
-            await PostWithToken("Company/UploadFile", { fileName: d.data.fileName, id: dataId }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
-
-        }
-        setRefreshDatatable(new Date())
-    }
-    const deleteFile = async (fileName, id) => {
-
-        await PostWithToken("Company/FileDelete", { fileName: fileName, id: id }).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
-
-
-    }
-    const deleteData = async (data) => {
-        var d = await GetWithToken("company/delete/" + data.id).then(x => { return x.data }).catch((e) => { AlertFunction("Başarısız işlem", "Bu işlmel için yetkiniz bulunmuyor"); return false })
         if (d.isError) {
             alert(d.message)
         }
+
+
         setRefreshDatatable(new Date())
-
     }
-    const createPassword = () => {
 
-        var idata = initialData;
-        idata.password = "M" + Math.random().toString(36).slice(-5) + "2!"
-        setInitialData(idata)
-        setRefresh(new Date())
-    }
-    const resetPassword = () => {
 
-        var idata = initialData;
-        idata.password = ""
-        setInitialData(idata)
-        setRefresh(new Date())
 
-    }
 
 
     const editData = async (data) => {
+        debugger
         setHiddenPassordField(true)
-        var d = await GetWithToken("Company/getById/" + data.id).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
+        var d = await GetWithToken("DocumentApplication/GetById/" + data).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
 
 
         setInitialData(d.data)
@@ -126,8 +84,8 @@ export default function Index() {
                         validate={values => {
                             const errors = {};
 
-                            if (!values.name) {
-                                errors.name = 'Bu alan zorunludur';
+                            if (!values.interviewer) {
+                                errors.interviewer = "Bu alan zorunludur"
                             }
                             return errors;
                         }}
@@ -147,52 +105,76 @@ export default function Index() {
                                     <ErrorMessage name="id" component="div" className='text-danger' />
                                     <Field type="hidden" name="id" />
                                     <div className='col-md-6 col-12  mb-3'>
-                                        <ErrorMessage name="name" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Firma Ad/Ünvan</label>
-                                        <Field type="text" id="name" className="form-control" name="name" />
+                                        <ErrorMessage name="fullName" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Ad Soyad</label>
+                                        <Field type="text" id="fullName" className="form-control" disabled name="fullName" />
                                     </div>
                                     <div className='col-md-6 col-12  mb-3'>
-                                        <ErrorMessage name="email" component="div" className='text-danger danger-alert-form' />
+                                        <ErrorMessage name="mail" component="div" className='text-danger danger-alert-form' />
                                         <label className='input-label'>E-Posta</label>
-                                        <Field type="text" id="email" className="form-control" name="email" />
+                                        <Field type="text" id="mail" className="form-control" disabled name="mail" />
                                     </div>
 
                                     <div className='col-md-6 col-12  mb-3'>
                                         <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
                                         <label className='input-label'>Telefon</label>
-                                        <Field type="text" id="phone" className="form-control" name="phone" />
-                                    </div>
-                                    <div className='col-md-6 col-12 mb-3'>
-                                        {/* <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' /> */}
-                                        <label className='input-label'>Firma Logo</label>
-                                        <input type="file" onChange={(x) => setFile(x.target.files[0])} name="file" id="file"></input>
-                                        {
-                                            file != null &&
-                                            <div className='col-12 mt-2'>
-                                                <img style={{ width: "100px" }} src={URL.createObjectURL(file)}></img>
-                                                <button type='button' className='btn btn-danger btn-sm' onClick={() => { setFile(null) }} > Kaldır X</button>
-                                            </div>
-                                        }
+                                        <Field type="text" id="phone" className="form-control" disabled name="phone" />
 
-                                        {
-                                            file == null && values.logoUrl &&
-                                            <div className='col-12 mt-2'>
-                                                <img style={{ width: "100px" }} src={fileUploadUrl + values.logoUrl}></img>
-                                                <button type='button' className='btn btn-danger btn-sm' onClick={async () => { setFieldValue("logoUrl", null); setFile(null); await deleteFile(values.logoUrl, values.id); }} > Kaldır X</button>
-                                            </div>
-                                        }
+                                    </div>
+                                    <div className='col-md-6 col-12  mb-3'>
+                                        <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Durum</label>
+                                        <select onChange={(x) => setFieldValue("status", x.target.value)} onBlur={handleBlur} value={values?.status} style={{ width: "100%", padding: 7 }}>
+                                            <option value={1}>
+                                                Bekliyor
+                                            </option>
+                                            <option value={2}>
+                                                Olumlu
+                                            </option>
+                                            <option value={3}>
+                                                Olumsuz
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div className='col-md-6 col-12  mb-3'>
+                                        <ErrorMessage name="interviewer" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Görüşen Kişi</label>
+
+                                        <Field type="text" id="interviewer" className="form-control" name="interviewer" />
                                     </div>
 
-                                    <div className='col-12  mb-3'>
-                                        <ErrorMessage name="address" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Adres</label>
-                                        <Field as="textarea" name="address" className="form-control">
-                                        </Field>
-                                    </div>
                                     <div className='col-12 mb-3'>
                                         <ErrorMessage name="description" component="div" className='text-danger danger-alert-form' />
-                                        <label className='input-label'>Açıklama</label>
-                                        <Field as="textarea" name="description" className="form-control">
+                                        <label className='input-label'>Başvurulan Sertifika/Rapor</label>
+                                        <div className='row mt-3' style={{
+                                            background: " #d4ffdd",
+                                            padding: 5,
+                                            border: "1px solid #0e7211"
+                                        }}>
+                                            <div className='col-12 col-lg-6 '>
+                                                <b>ADI : </b>{values.documentName}
+                                            </div>
+                                            <div className='col-12 col-lg-6 '>
+                                                <b> Onay Numarası :</b> {values.documentNo}
+                                            </div>
+                                            <div className='col-12 mt-2'>
+                                                <b>Açıklama : </b>{values.documentDescription}
+                                            </div>
+                                            <div className='col-12 mt-3 mb-3'>
+                                                <b>Ek Belgeler : </b>{
+                                                    values?.documentFiles?.map((value, key) => {
+                                                        console.log("fsdgd", value)
+                                                        return (<a target="_blank" key={key} href={fileUploadUrl + value.url}> {value.extension} </a>)
+                                                    })}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div className='col-12 mb-3'>
+                                        <ErrorMessage name="description" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Görüşme Notları</label>
+                                        <Field as="textarea" name="notes" className="form-control">
                                         </Field>
                                     </div>
 
@@ -205,7 +187,7 @@ export default function Index() {
                                             <button type='submit' disabled={isSubmitting} className={"btn btn-primary btn-block loading-button" + (isSubmitting && " loading-button")}><span>Kaydet <i className="icon-circle-right2 ml-2"></i></span></button>
                                         </div>
                                         <div className='col-md-3 col-12 mt-1'>
-                                            <button type='button' onClick={() => { toggleModal() }} className={"btn btn-warning btn-block "}><span>Kapat <i className="fas fa-undo ml-2"></i></span></button>
+                                            <button type='button' onClick={() => { setModelOpen(!modalOpen) }} className={"btn btn-warning btn-block "}><span>Kapat <i className="fas fa-undo ml-2"></i></span></button>
                                         </div>
                                     </div>
                                 </>}
@@ -220,7 +202,7 @@ export default function Index() {
                 <PageHeader title="Sertifika & Firma" map={[
                     { url: "", name: "Sertifika & Firma" },
                     { url: "", name: "Başvurular" },
-                    
+
                 ]}>
 
                 </PageHeader>
@@ -233,9 +215,30 @@ export default function Index() {
                             ["fullName", "Ad Soyad"],
                             ["mail", "E-Posta"],
                             ["phone", "Telefon"],
+
                             {
+                                header: <span>Durum</span>,
+                                dynamicButton: (data) => {
+
+                                    if (data.status == 1) {
+                                        return (<span style={{ color: "orange", fontWeight: "bold" }} ><i className='fas fa-exclamation-triangle'></i> Bekliyor</span>)
+
+                                    } else if (data.status == 2) {
+
+                                        return (<span style={{ color: "green", fontWeight: "bold" }} ><i className='fas fa-check-circle'></i> Onaylandı</span>)
+
+
+                                    } else if (data.status == 3) {
+
+                                        return (<span style={{ color: "red", fontWeight: "bold" }} ><i className='fa fa-times-circle'></i> Olumsuz</span>)
+
+
+                                    }
+
+                                }
+                            }, {
                                 header: <span>Detay</span>,
-                                dynamicButton: (data) => { return <a className='btn btn-sm btn-info' title='Detay' href={"firma-tanimlari/detay/" + data.id}><i className='fas fa-search'></i> Detay</a> }
+                                dynamicButton: (data) => { return <button className='btn btn-sm btn-info' title='Detay' onClick={() => { editData(data.id) }}><i className='fas fa-search'></i> Detay</button> }
                             }
                         ]} Title={<span>Firma Listesi</span>}
                             Description={"Yapılan başuruları takip edebilir, başvurular hakkında işlem kaydı tutabilirsiniz"}
@@ -246,8 +249,8 @@ export default function Index() {
                             //         setFile(null)
                             //     }
                             // }}
-                            EditButton={editData}
-                            DeleteButton={deleteData}
+
+                            HideButtons
                             Pagination={{ pageNumber: 1, pageSize: 10 }}
                         ></DataTable>
                     </div>
