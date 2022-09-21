@@ -164,7 +164,7 @@ export default function Index() {
                                                 <b>Ek Belgeler : </b>{
                                                     values?.documentFiles?.map((value, key) => {
                                                         console.log("fsdgd", value)
-                                                        return (<a target="_blank" key={key} href={fileUploadUrl + value.url}> {value.extension} </a>)
+                                                        return (<a target="_blank" key={key}  rel="noreferrer"  href={fileUploadUrl + value.url}> {value.extension} </a>)
                                                     })}
                                             </div>
 
