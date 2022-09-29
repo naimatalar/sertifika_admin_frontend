@@ -3075,3 +3075,9 @@ float: left;
     font-weight: bold;
    
 }
+.form-n-popup .form-control:disabled {
+    
+    color: #e55f00 !important;
+    font-weight: bold !important;
+
+}

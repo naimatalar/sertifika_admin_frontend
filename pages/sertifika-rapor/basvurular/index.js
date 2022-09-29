@@ -13,7 +13,7 @@ import { fileUploadUrl, GetWithToken, PostWithToken, PostWithTokenFile } from '.
 
 export default function Index() {
     const [modalOpen, setModelOpen] = useState(false)
-    const [initialData, setInitialData] = useState({ id: null })
+    const [initialData, setInitialData] = useState({ id: null, negaticeStatus: null })
     const [hiddenPassordField, setHiddenPassordField] = useState(false)
     const [refresh, setRefresh] = useState(null)
     const [roles, setRoles] = useState([])
@@ -119,8 +119,13 @@ export default function Index() {
                                         <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
                                         <label className='input-label'>Telefon</label>
                                         <Field type="text" id="phone" className="form-control" disabled name="phone" />
-
                                     </div>
+                                    <div className='col-md-6 col-12  mb-3'>
+                                        <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Başvuru Kanalı</label>
+                                        <Field type="text" id="phone" className="form-control" value={values.isMobil&&"Mobil App"||"Web"} disabled name="phone" />
+                                    </div>
+
                                     <div className='col-md-6 col-12  mb-3'>
                                         <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
                                         <label className='input-label'>Durum</label>
@@ -136,6 +141,24 @@ export default function Index() {
                                             </option>
                                         </select>
                                     </div>
+                                    {values?.status == 3 && <div className='col-md-6 col-12  mb-3'>
+                                        <ErrorMessage name="phone" component="div" className='text-danger danger-alert-form' />
+                                        <label className='input-label'>Olumsuz Sebebi</label>
+                                        <select onChange={(x) => setFieldValue("negaticeStatus", x.target.value)} onBlur={handleBlur} value={values?.negaticeStatus} style={{ width: "100%", padding: 7 }}>
+                                            <option value={1}>
+                                                İletişim Bilgileri Numarası Hatalı
+                                            </option>
+                                            <option value={2}>
+                                                Ulaşılamadı
+                                            </option>
+                                            <option value={3}>
+                                                Konuşmayı Reddetti
+                                            </option>
+                                        </select>
+                                    </div>
+                                    }
+
+
                                     <div className='col-md-6 col-12  mb-3'>
                                         <ErrorMessage name="interviewer" component="div" className='text-danger danger-alert-form' />
                                         <label className='input-label'>Görüşen Kişi</label>
@@ -164,7 +187,7 @@ export default function Index() {
                                                 <b>Ek Belgeler : </b>{
                                                     values?.documentFiles?.map((value, key) => {
                                                         console.log("fsdgd", value)
-                                                        return (<a target="_blank" key={key}  rel="noreferrer"  href={fileUploadUrl + value.url}> {value.extension} </a>)
+                                                        return (<a target="_blank" key={key} rel="noreferrer" href={fileUploadUrl + value.url}> {value.extension} </a>)
                                                     })}
                                             </div>
 

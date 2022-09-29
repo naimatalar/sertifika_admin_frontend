@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 
 // export const apiConstant = "https://api.kredi.com.tr";
-export const apiConstant = "http://37.148.212.29:8085";
+export const apiConstant = "http://localhost:58073";
 export const antegraSystem = "http://localhost:2354/api/";
 
 const masterUrl = apiConstant + "/api/";
@@ -21,7 +21,7 @@ export const GetWithToken = async (url) => {
         return Axios.get(masterUrl + url, headers)
     } catch (error) {
         alert("hata oluştu n/ " + error)
-
+ 
     }
 }
 

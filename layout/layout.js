@@ -303,7 +303,7 @@ function Layout({ children, permissionControl = true }) {
 
                         <div className="navbar-collapse collapse" id="navbar-footer">
                             <span className="navbar-text">
-                                &copy; 2015 - 2018. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+                                &copy; 2022 <b>Naim ATALAR </b>Tarafından Projelendirilmiştir
                             </span>
 
                             <ul className="navbar-nav ml-lg-auto">
