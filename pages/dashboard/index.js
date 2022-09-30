@@ -23,7 +23,7 @@ export default function Index() {
     <PageHeader title="Dashboard" map={[
 
     ]}>
-
+ 
     </PageHeader>
     <div className='content'>
       <div className='row justify-content-around'>
