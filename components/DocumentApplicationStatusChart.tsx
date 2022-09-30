@@ -44,8 +44,7 @@ export function DocumentApplicationChart({year,mout}) {
     
     var d = await GetWithToken("Charts/GetDocumentApplicationStatusChart/" + year+"/"+mout).then(x => { return x.data }).catch((e) => { AlertFunction("", e?.response?.data); return false })
     var data = d.data
-    console.log("backdata",data)
-    console.log("statik",chartData)
+
 
 
     setChartData(data);

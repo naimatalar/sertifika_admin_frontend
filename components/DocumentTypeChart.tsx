@@ -72,9 +72,6 @@ export function DocumentTypeChart({ year }) {
   const start = async () => {
     var d = await GetWithToken("Charts/getDocumentTypeByYear/" + year).then(x => { return x.data }).catch((e) => { AlertFunction("", e.response.data); return false })
     var data = d.data
-  
-
-
     setChartData(data);
 
   }
